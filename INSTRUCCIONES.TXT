@@ -1,0 +1,41 @@
+instalacion:
+*el juego requiere java (de 32 bits si es posible para el funcionamiento de los joysticks).
+*poner el archivo "jjstick.dll" en "C:\Windows\System32\" o en "C:\Windows\SysWOW64\" si tu pc es de 64 bits.
+(ese paso es opcional, solo si quieres usar joysticks).
+*iniciar el juego(BlockManX.jar).
+
+configuracion de controles:
+*seleccionar opciones, luego controles
+*luego seleccionar el jugador que desea configurar.
+*asignar dispostivo al jugador (por defecto es teclado).
+*se puede reestablecer la configuracion por defecto presionando restaurar
+*tambien se puede borrar la configuracion presionando borrar.
+*para cambiar una accion presione el boton correspondiente, luego presione la tecla q desee asignar.
+
+modo local de hasta 4 jugadores (con joysticks):
+*seleccione jugar, luego seleccione el modo de juego (NORMAL/BATALLA).
+*luego seleecione el numero de jugadores (1-4).
+*NOTA: el modo mas completo es el NORMAL.
+
+modo online (permite 4 jugadores por cada juego iniciado desde diferentes computadores):
+*iniciar el servidor (BlockManXServer.jar).
+*dejar el puerto en 7777, y presionar iniciar.
+*luego se puede iniciar el juego (BlockManX.jar), y en el menu opciones/configuracion especificar la direccion ip del computador donde se inicio el server.
+*por ahora la resolucion debe ser la ultima (16 pixel/tile(normal)).
+*el sonido no esta disponible por ahora.
+*presionar aceptar, luego iniciar el juego con 1 a 4 jugadores.
+
+controles por defecto:
+flecha izquierda=moverse hacia la izquierda.
+flecha derecha=moverse hacia la derecha.
+flecha arriba=ponerse de lado.(hacerse angosto).
+flecha abajo=agacharse.
+espacio=saltar.
+f=disparar.
+s=moverse mas rapido.
+o=cambiar de arma.
+m=cambiar de skin.
+enter=en el futuro sera para pausar el juego.
+
+cualquier consulta contactame por correo:
+miltongutierrezsaban@gmail.com

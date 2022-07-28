@@ -1,0 +1,17 @@
+BOLCKMAN (4 jugadores):
+
+el juego requiere java.
+
+controles por defecto:
+
+*usa las flechas para moverte de izquierda a derecha.
+*usa la barra espaciadora para saltar (mantener apretada).
+*usa F para disparar.
+*usa O para cambiar de arma(si es que tienes balas amarillas).
+*usa S para correr.
+
+notas: los controles pueden ser cambiados en el menu principal,
+tambien puedes configurar los joystick seleccionando el dispositivo
+y el jugador correspondiente.
+puedes cambiar la resolucion o algo asi en el menu de configuracion,
+el sonido no esta disponible.

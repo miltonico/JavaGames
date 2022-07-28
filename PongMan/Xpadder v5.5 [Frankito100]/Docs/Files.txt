@@ -1,0 +1,2 @@
+The only file necessary is "Xpadder.exe".
+All other files and folders can be deleted, renamed or moved, including all language files.

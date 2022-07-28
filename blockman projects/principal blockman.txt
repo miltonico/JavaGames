@@ -1,0 +1,52 @@
+orden:
+implementar renderizado inteligente con camara.
+implementar sistema de retardo q actualice cada elemento a su respectiva velocidad.
+
+armas:
+*pistola:
+retardo -> 1
+retardo lanzamiento -> 8
+daño -> 1
+
+*pistola de balas q rebotan:
+retardo -> 4/2/1
+retardo lanzamiento -> 16
+daño -> 2/4/6(si no rebota) o 1/2/3(si rebota)
+
+*ametralladora:
+retardo -> 1
+retardo lanzamiento -> 4
+daño -> 1
+
+*lanzamisiles:
+retardo -> 2
+retardo lanzamiento -> 32
+daño -> 4
+
+*arma laser:
+retardo -> 0 (instantaneo)
+retardo lanzamiento -> 0 (infinito)
+daño -> 1 cada 4 fps?
+alcance -> 5
+
+*power ups para armas:
+hielo: los proyectiles congelan.(10 disparos)
++ velocidad de ataque: 2x velocidad ataque.(10 disparos)
+triplicador: triplica los ataques.(10 disparos)
+
+poderes especiales:
+*snake: el jugador se transforma en una serpiente voladora con 20 puntos de vida
+la serpiente mata instantaneamente al enemigo, pero tiene un retardo
+de movimiento de 4, aunque puede correr(retardo 2).y si la matan el jugador
+vuelve a su estado normal.
+
+*escudo reflectante: el jugador se vuelve invulnerable por 10 segundos,
+haciendo rebotar los proyectiles (menos misiles y rayos).
+
+*hipervelocidad: el jugador se mueve a la velocidad de las balas(muuuuy rapido).
+
+
+
+
+
+

@@ -1,0 +1,13 @@
+             BLOCKMAN!!!
+                
+1) descargar (link en la descripción).
+
+2) descomprimir.
+
+3) poner el dll en system32. si su
+ pc es de 64 bits entonces en syswow64.
+
+4) ejecutar el juego (blockman.jar).
+
+5) jugar (hasta 4 player con joysticks).
+

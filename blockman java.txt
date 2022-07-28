@@ -1,0 +1,77 @@
+hacer principalmente:
+
+1) dar errores en paneles o ventanas...
+
+2) guardar dispositivos configurados...
+
+3) que no se cierre el menu...(listo)
+
+4) mejoras del cañon:
+
+*balas zig-zag.
+*balas ralentizantes.
+*balas de explosion en area (3x3).
+*balas semi-dirigidas.
+*balas de acero (daño verdadero, no se puede reducir).
+*balas de gravedad(atraen al suelo y ralentizan)
+
+5)power ups:
+
+*invulnearabilidad momentanea.
+*hiper-velocidad momentanea.
+*super-velocidad de ataque momentanea.
+*capacidad de volar momentánea.
+
+
+
+
+
+
+NUEVAS IDEAS:
+
+1) hacer enemigo serpiente:
+
+*podra comerse a los jugadores, o mutilarlos de forma instantánea.
+*todos los efectos se desencadenan cuando crece, es decir cuando la comida llega al ultimo cuadro de la serpiente.
+*se puede comer a si misma.
+*al comer se vuelve mas lenta hasta que "digiera" la comida (cresca).
+*su velocidad normal es del jugador corriendo, su velocidad digiriendo es la mitad (jugador caminando).
+*cuando es cortada, la parte que fue cortada desaparece, pero deja items o capsulas de vida (1/4 chance x cuadrado).
+*no tiene vida, pero si es cortada, y le quedan menos de 3 cuadrados en su cuerpo "vivo", muere.
+*puede comer proyectiles no cortantes (estos la haran mas lenta al digerir).
+*si come un proyectil cortante, muere instantáneamente.
+*la serpiente si muere o es cortada mientras digería, los elementos que digería caerán al suelo (excepto proyectiles).
+*si la serpiente choca, muere instantáneamente, al igual q si choca con la cabeza de otra serpiente
+ (si se cambiaran los dos cuadros al mismo tiempo  en direcciones opuestas, ambas serpientes morirían,
+ al comerse el siguiente cuadro despues de la cabeza), pero si choca contra su cuerpo, no (se puede comer).
+
+2) vida dinámica:
+
+*hacer q los cuadrados tengan vida individual, de esta forma si se mata un cuadrado de un jugador, este lo perderá.
+*los cuadrados perdidos se pueden recuperar solamente recogiendo cuadrados.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

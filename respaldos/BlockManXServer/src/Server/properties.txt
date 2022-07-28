@@ -1,0 +1,8 @@
+tileSize=16
+UDPPort=7777
+TCPPort=7777
+maxPlayers=0
+maxClients=0
+friendlyFire=true
+tetrisSkin=false
+megamanSkin=false

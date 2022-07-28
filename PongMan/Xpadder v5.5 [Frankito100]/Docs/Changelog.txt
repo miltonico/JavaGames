@@ -1,0 +1,65 @@
+Changes from v5.4 to v5.5
+====================================
+
+Added AutoProfile system (this was the Feature X that 43% of you voted for)
+Added Copy and Paste function for controller files via the controller menu (you can now post controller files on forums without needing to zip, upload and link)
+Added Copy Text buttons to all dialogs and the Help and Controller Properties windows to help with debugging and reporting errors (saves having to produce screenshots)
+Added Explore button to Controller/Profile menus and Language Settings page
+Added scrollbars to all lists (they are visual only so the actual bar cannot be dragged yet)
+Added hints to lists so all text can be seen if too long
+Added controller ID to controller list
+Added Disabled mouse cursor to Assignment image if Editing is disabled due to sequences and the advanced assignment window is not open
+Added support for stick 1 to be analog if stick 2 was pov
+Optimized Advanced Assignment Cycle help
+Optimized Xbox 360 properties text display
+Increased maximum automatic controller links from 32 to 255
+Increased maximum languages from 16 to 255
+Replaced confusing save icons with traditional disk icons
+Replaced capital letters in settings help windows with square brackets (not all alphabets have case distinction)
+Replaced "Download v?" for binary files with conversion email instruction
+Replaced all "Details" buttons with the more conventional "Properties" text
+Removed Language Update button to promote editing archived language file not own local copy
+Fixed a bug where disabling XInput could cause an error if a controller was using XInput at the time
+Fixed a bug where a bad device driver that caused an enumdevices exception was assumed to be the result of a debug version of DirectInput (thanks to Andy M)
+Fixed a bug where pressing the DPad while scanning for a stick caused an error problems (thanks to Danny)
+Fixed a bug where Advanced Assignment Insert, Delete and Clear buttons did not disable when they had no effect (thanks to hiryu)
+Fixed a bug where Profile KeyTapTime slider value was hidden (thanks to Cable)
+Fixed a bug where the tab image did not resize when more controllers were connected
+Fixed a bug where instructions to disable debug version of DirectInput were not correct
+Fixed a bug where Controller and Profile name buttons lost yellow "changes made" highlight if controller was disconnected
+Fixed a bug where saving controller file with a new name when controller settings window was open did not update its titlebar with new name
+Fixed a bug where tray icon menu showed windows version of controller name instead of user-defined controller file name
+Fixed a bug where save profile dialog showed "opening" text instead of "pasting" when pasting a profile over unsaved profile
+Fixed a bug where pasting a profile showed "Opening profile" instead of "Pasting profile" while animation occurred
+Fixed a bug where main Assignment Group help described old right-click method (thanks to Cable)
+Fixed a bug where Gradient button style created random colours in some areas (thank to Antonio)
+Fixed a bug where Update and Windows 2000 XInput help remained from v5.3
+
+Changes from v5.3 to v5.4
+====================================
+
+Optimized for Windows XP and higher
+Optimized all sub-windows
+Optimized executable code by using latest compiler
+Improved screen update system
+Improved language file rating check
+Improved new language file creation
+Improved Windows service pack detection on non-English systems
+Added support for Windows 7 and Windows Server 2008 (original and R2)
+Added Unicode support
+Added "installation" language selection and instant language selection
+Added unused language file line check
+Added first-run legal and license dialogs
+Added "last version run" recognition
+Fixed a bug where logging off/shutting down windows was not handled correctly
+Fixed a bug where closing sub-windows via a button was not handled correctly
+Fixed a bug where closing sub-windows was not handled correctly
+Fixed a bug where display could flicker on dual-core systems
+Fixed a bug where Windows options were badly arranged and help did not match order
+Fixed a bug where some language lines were inefficient multiple sentences
+Fixed a bug where some false lines were processed when creating/checking a language file
+Fixed a bug where Help did not explain missing options in mouse settings window if no mouse assignments are currently assigned
+Fixed a bug where release type text appeared in language, controller and profile files and in boot exename check dialog
+Fixed a bug where the associate files option did not remain disabled across restarts
+Fixed a bug where the trigger deadzone value did not update as the trackbar moved
+Removed update system and all internet-related code

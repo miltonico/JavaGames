@@ -1,0 +1,40 @@
+##########################   BOLCKMAN v0.1   ###########################
+                          (juego 4 jugadores)                          #
+                                                                       #
+                                                                       #
+1) PARA QUE FUNCIONE EL JUEGO DEBEN COLOCAR EL DLL EN LA CARPETA       #
+   SYSTEM32(C:\windows\system32), O SYSWOW64(C:\windows\syswow64)      #
+   EN COMPUTADORES DE 64BITS.                                          #
+                                                                       #
+2) el juego requiere java.                                             #
+                                                                       #
+3) CONTROLES POR DEFECTO:                                              #
+                                                                       #
+* usa las flechas para moverte de izquierda a derecha, agacharte       #
+  y transformarte en paleta (para rebotar balas).                      #  
+                                                                       #
+* usa la barra espaciadora para saltar (mantener presionada).          #
+                                                                       #
+* usa F para disparar.                                                 #
+                                                                       #
+* usa O para cambiar de arma(si es que tienes balas amarillas).        #  
+                                                                       #
+* usa S para correr.                                                   #
+                                                                       #
+4) notas:                                                              #
+                                                                       #
+* los controles pueden ser cambiados en el menu principal.             #
+                                                                       #
+* puedes configurar los joystick seleccionando el dispositivo          #
+  y el jugador correspondiente.                                        #
+                                                                       #
+* puedes usar el pad direccional o la palanca segun el boton           #
+  q presiones para configurar los controles.                           #
+                                                                       #
+* puedes cambiar la resolucion o algo asi en el menu de configuracion, #
+                                                                       #
+* el sonido no esta disponible.                                        #
+                                                                       #
+                                                                       #
+                                                                       #
+########################################################################

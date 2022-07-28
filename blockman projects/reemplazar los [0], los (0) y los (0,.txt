@@ -1,0 +1,731 @@
+package BlockMan;
+
+import java.awt.event.*;
+
+public class Jugador2 implements KeyListener {
+	
+	//metodos por jugador:
+	//animar,getX,getY,setX,setY.
+	
+	public static final int teclaIzquierda=Teclas.teclas[1][0];
+	public static final int teclaDerecha=Teclas.teclas[1][1];
+	public static final int teclaDisparo=Teclas.teclas[1][5];
+	public static final int teclaSalto=Teclas.teclas[1][4];
+	public static final int teclaAgacharse=Teclas.teclas[1][2];
+	public static final int teclaArriba=Teclas.teclas[1][3];
+        public static final int teclaCorriendo=Teclas.teclas[1][6];
+        public static final int teclaCambiar=Teclas.teclas[1][7];
+	
+	public static boolean gano=false;
+	
+	private int nivel=1;
+	//Juego j;
+	Balas balas=new Balas();
+	Personaje personaje=new Personaje();
+        Actualizaciones act=new Actualizaciones();
+        
+        public static boolean reap=false;
+        
+	//MapaTiles mapa=MapaTiles.DesdeArchivo("map"+nivel+".txt");
+	public static boolean disparo=false,disparo2=false,arriba2=false,abajo2=false,espacio2=false,izquierda2=false,derecha2=false,agacharse2=false,espacio, arriba, izquierda, derecha,agacharse;
+	private int contadorQuema=0,contadorCura=0,sumaY,altoDelSalto=0,accionAnterior=0,poderDeSalto=5,direccion=1,contador2=0;
+    private boolean techoAnterior=false,direccionado=false,valido=true,nulo=false,moviendose=false,apretando=false,techo=false,firme=true,salto=false,estaSaltando=false,estaCayendo=false;
+    private int marcaPasos=0,contadorSprite=0,contador=0,accionActual=0,auxX=personaje.posIniX[1],auxY=personaje.posIniY[1],ancho=Juego.ancho,alto=Juego.alto;
+    //nuevo actualizar:
+    
+    public static int mx=0,my=0,pos=0,posAnterior=0,altura=0,contadorFrames=0,contadorDisparo=0,retardoArmaActual=0;//contadorFrames hasta 8.
+    public static boolean cayendo=false,paso=true,saltar=false,disparado=false,cambiado=false,corriendo=false,cambiar=false,cambiar2=false,
+            corriendoAire=false,corriendo2=false,volar=false,hiperVelocidad=false,ralentizacion=true;
+    public boolean[] contadorDeRetardo=new boolean[5];//0=quieto, 5 velocidades (0,1,2,4,8).
+    
+    public void actualiza2(){
+        
+        //reiniciamos las variables:
+        mx=my=0;
+        
+        if((contadorFrames==0 || contadorFrames==4)){
+            contadorDeRetardo[3]=true;
+        }else{
+            contadorDeRetardo[3]=false;
+        }
+        
+        if((contadorFrames==2 || contadorFrames==6) && (corriendo==true || corriendo2==true)){
+            contadorDeRetardo[2]=true;
+        }else{
+            contadorDeRetardo[2]=false;
+        }
+        
+        if((contadorFrames==1 || contadorFrames==2 || contadorFrames==3 || contadorFrames==5 || contadorFrames==6 || contadorFrames==7) && (hiperVelocidad==true)){
+            contadorDeRetardo[1]=true;//maxima velocidad
+        }else{
+            contadorDeRetardo[1]=false;//maxima velocidad
+        }
+        
+        if(ralentizacion==true){
+            contadorDeRetardo[1]=false;
+            contadorDeRetardo[2]=false;
+            //contadorDeRetardo[3]=false;
+            if(contadorFrames==0 || (contadorFrames==4 && ralentizacion==true && (corriendo==true || corriendo2==true))){
+                contadorDeRetardo[4]=true;//mas lentoooooo.
+            }else{
+                contadorDeRetardo[4]=false;
+            }
+        }else{
+            contadorDeRetardo[4]=false;
+        }
+        
+        if((contadorDeRetardo[3]==true && ralentizacion==false) || contadorDeRetardo[1]==true || contadorDeRetardo[4]==true || (contadorDeRetardo[2]==true && (corriendoAire==true || (saltar==false && cayendo==false)))){
+            
+            //obtenemos la accion anterior:
+            posAnterior=Personaje.accion[0];
+            pos=0;
+            
+            //comprobamos los cambios en el eje x:
+            if(!((izquierda || izquierda2) && (derecha || derecha2)) && (izquierda || izquierda2 || derecha || derecha2)){//si solo esta activada 1 direccion de las 2 y por lo menos 1:
+                if(derecha || derecha2){
+                    if(paso==true){
+                        paso=false;
+                        pos=1;
+                    }else{
+                        paso=true;
+                        pos=0;
+                    }
+
+                    mx++;
+                }
+                if(izquierda || izquierda2){
+                    if(paso==true){
+                        paso=false;
+                        pos=3;
+                    }else{
+                        paso=true;
+                        pos=0;
+                    }
+                    mx--;
+                }
+            }else{
+                paso=true;
+            }
+
+            //comprobacion de otras posiciones:
+
+            if(saltar && (espacio || espacio2) || cayendo){
+                if(mx==1){
+                    pos=2;
+                }
+                if(mx==-1){
+                    pos=4;
+                }
+            }
+
+            if(agacharse || agacharse2){
+                pos=6;
+            }
+
+            //la comprobacion de la paleta:
+            if(arriba || arriba2){
+                pos=5;
+            }
+        }
+        
+        //comprobamos los cambios en el eje y:
+        if(contadorDeRetardo[3]==true){
+            if((espacio || espacio2) && ((cayendo==false  && saltar==true) || volar==true) && altura<Actualizaciones.saltoJugador[0]){
+                my--;
+                if(volar==false){
+                    altura++;
+                }else{
+                    saltar=true;
+                    cayendo=false;
+                    if(corriendo || corriendo2){
+                        corriendoAire=true;
+                    }else{
+                        corriendoAire=false;
+                    }
+                }
+            }else{
+                if(desbloqueado(posAnterior,Personaje.x[0],Personaje.y[0]+1)){
+                    cayendo=true;
+                }else{
+                    saltar=true;
+                    altura=0;
+                    cayendo=false;
+                    if(corriendo==false){
+                        corriendoAire=false;//no puede moverse rapido en el aire si no estaba corriendo antes de saltar.
+                    }else{
+                        corriendoAire=true;
+                    }
+                }
+                if((espacio || espacio2) && cayendo==false && saltar==true && altura<Actualizaciones.saltoJugador[0]){
+                    my--;
+                    if(volar==false){
+                        altura++;
+                    }else{
+                        saltar=true;
+                        cayendo=false;
+                        if(corriendo || corriendo2){
+                            corriendoAire=true;
+                        }else{
+                            corriendoAire=false;
+                        }
+                    }
+                }
+            }
+
+            if(cayendo){
+                my++;
+            }
+        }
+
+        //comprobaciones de bloqueos:
+        if(!(MapaTiles.mapaFisico[personaje.getY(0)+3][personaje.getX(0)+1+mx]==1 || MapaTiles.jugadores[personaje.getY(0)+3][personaje.getX(0)+1+mx]==1 || MapaTiles.mapaFisico[personaje.getY(0)+3][personaje.getX(0)+1]==1 || MapaTiles.jugadores[personaje.getY(0)+3][personaje.getX(0)+1]==1) && (desbloqueado(pos,Personaje.x[0]+mx,Personaje.y[0]+my) || desbloqueado(posAnterior,Personaje.x[0]+mx,Personaje.y[0]+my))){//si ademas esta empalado.
+            Personaje.x[0]+=mx;
+            Personaje.y[0]+=my;
+        }else{
+            if(!(MapaTiles.mapaFisico[personaje.getY(0)+3][personaje.getX(0)+1+mx]==1 || MapaTiles.jugadores[personaje.getY(0)+3][personaje.getX(0)+1+mx]==1 || MapaTiles.mapaFisico[personaje.getY(0)+3][personaje.getX(0)+1]==1 || MapaTiles.jugadores[personaje.getY(0)+3][personaje.getX(0)+1]==1) && (desbloqueado(pos,Personaje.x[0]+mx,Personaje.y[0]))){//si ademas esta empalado.
+                Personaje.x[0]+=mx;
+            }else{
+                if(desbloqueado(posAnterior,Personaje.x[0]+mx,Personaje.y[0])){
+                    pos=posAnterior;
+                    Personaje.x[0]+=mx;
+                }else{
+                    //corriendoAire=false;
+                }
+            }
+            if(desbloqueado(pos,Personaje.x[0],Personaje.y[0]+my)){
+                Personaje.y[0]+=my;
+            }else{
+                if(desbloqueado(posAnterior,Personaje.x[0],Personaje.y[0]+my)){
+                    pos=posAnterior;
+                    Personaje.y[0]+=my;
+                }else{
+                    if(volar==false){
+                        saltar=false;
+                    }
+                    corriendoAire=true;//si no esta saltando puede moverse rapidamente en el aire (si esta corriendo y salta).
+                }
+                
+            }
+        }
+        
+        
+        if(contadorDeRetardo[1]==true || contadorDeRetardo[2]==true || contadorDeRetardo[3]==true || contadorDeRetardo[4]==true){
+            //reestablecer la posicion si es necesario:
+            if(!desbloqueado(pos,Personaje.x[0],Personaje.y[0])){
+                pos=posAnterior;
+            }
+
+            //establece la direccion:
+            switch(pos){
+                case 0:
+                    if(derecha || derecha2) direccion=2;
+                    if(izquierda || izquierda2) direccion=1;
+                    break;
+                case 1:
+                    direccion=2;
+                    break;
+                case 2:
+                    direccion=2;
+                    break;
+                case 3:
+                    direccion=1;
+                    break;
+                case 4:
+                    direccion=1;
+                    break;
+                case 5:
+                    if(derecha || derecha2) direccion=2;
+                    if(izquierda || izquierda2) direccion=1;
+                    break;
+                case 6:
+                    if(derecha || derecha2) direccion=2;
+                    if(izquierda || izquierda2) direccion=1;
+                    break;
+            }
+            //quemandose y curandose:
+        
+            if(quemandose2()){
+                if(personaje.vidas[0]>0){
+                    personaje.vidas[0]--;
+                }
+                ralentizacion=true;
+                volar=true;
+            }
+            if(aguandose()){
+                ralentizacion=true;
+                volar=true;
+            }
+            if(!quemandose2() && !aguandose()){
+                ralentizacion=false;
+                volar=false;
+            }
+            if(curandose2()){
+                if(personaje.vidas[0]<act.vidaJugador[0]){
+                    personaje.vidas[0]++;
+                }
+            }
+            
+            switch(tomoUnItem()){
+                case 0://nada.
+                    break;
+                case 26://pelotas.
+                    act.municionPelotas[0]=act.municionPelotas[0]+act.tamañoCartuchoPelotas;
+                    break;
+                case 33://misiles.
+                    act.municionMisiles[0]=act.municionMisiles[0]+act.tamañoCartuchoMisiles;
+                    break;
+                case 37://capsula curativa.
+                    Personaje.vidas[0]+=act.curacionCapsulas;
+                    if(Personaje.vidas[0]>act.vidaJugador[0]) Personaje.vidas[0]=act.vidaJugador[0];
+                    break;
+                case 44://mejora de vida.
+                    for(int i=0;i<Teclas.jugadores;i++){
+                        if(act.vidaJugador[i]<act.vidaMaxima){
+                            act.vidaJugador[i]+=act.mejoraDeVida;
+                            Personaje.vidas[i]+=act.mejoraDeVida;//cura solo lo q aumento.
+                        }
+                    }
+                    break;
+            }
+            int indiceCheck=tomoUnCheckPoint();
+            if(indiceCheck!=-1){
+                act.checkJugador[0]=indiceCheck;
+            }
+            
+            if(pos==5){
+                switch(sePuedeAgarrar()){
+                    case 1://izquierda:
+                        pos=3;
+                        break;
+                    case 2://izquierda:
+                        pos=1;
+                        break;
+                }
+            }
+            
+            //reestablecer las variables:
+            espacio2=false;
+            izquierda2=false;
+            derecha2=false;
+            arriba2=false;
+            abajo2=false;
+            agacharse2=false;
+            corriendo2=false;
+        }
+        
+        //otras comprobaciones:
+        if(murio()){
+            reaparecer();
+        }
+        
+        if(perdio()){
+            
+        }
+        
+    	if(gano()){
+    		
+    	}
+    	
+    	if(reap==true){
+            reaparecer();
+    	}
+        
+        //asignar la posicion:
+        personaje.animar(0,pos);
+        
+        //cambio de arma:
+        if((cambiar || cambiar2) && cambiado==false){
+            cambiado=true;
+            boolean cambio=false;
+            while(cambio==false){
+                if(act.armaActual[0]<(act.limiteArmas-1)){
+                    act.armaActual[0]++;
+                }else{
+                    act.armaActual[0]=1;
+                }
+                switch(act.armaActual[0]){
+                    case 1:
+                        cambio=true;
+                        break;
+                    case 2:
+                        if(act.municionPelotas[0]>0){
+                            cambio=true;
+                        }
+                        break;
+                    case 3:
+                        if(act.municionMisiles[0]>0){
+                            cambio=true;
+                        }
+                        break;
+                }
+            }
+        }
+        
+        //se define el retardo de acuerdo al arma.
+        switch(act.armaActual[0]){
+            case 0://nada
+                retardoArmaActual=0;
+                break;
+            case 1://pistola(la ametralladora aparece cuando tiene mejora de 2x velocidad ataque)
+                retardoArmaActual=act.retardoBalas/act.velocidadAtaque[0];
+                break;
+            case 2://arma boteadora.
+                retardoArmaActual=act.retardoPelotas/act.velocidadAtaque[0];
+                break;
+            case 3://lanza misiles
+                retardoArmaActual=act.retardoMisiles/act.velocidadAtaque[0];
+                break;
+            
+        }
+        
+        if(contadorDisparo>0){
+            contadorDisparo++;
+            if(contadorDisparo>=retardoArmaActual){
+                contadorDisparo=0;
+            }
+        }
+        
+        if((disparo || disparo2) && pos!=5 && contadorDisparo==0){// && disparado==false(para q dispare estilo megaman)
+            //disparado=true;(para q dispare estilo megaman)
+            switch(act.armaActual[0]){
+                case 0://nada
+                break;
+            case 1://pistola(la ametralladora aparece cuando tiene mejora de 2x velocidad ataque)
+                balas.nuevaBala(0,direccion,Personaje.x[0],Personaje.y[0]);
+                contadorDisparo++;//(1)
+                break;
+            case 2://arma boteadora.
+                balas.nuevaPelota(0,direccion,Personaje.x[0],Personaje.y[0]);
+                contadorDisparo++;//(1)
+                break;
+            case 3://lanza misiles
+                //balas.nuevoMisil(0,direccion,Personaje.x[0],Personaje.y[0]);
+                contadorDisparo++;//(1)
+                break;
+            }
+    	}
+        
+        disparo2=false;
+        cambiar2=false;
+        
+        //incrementa y resetea el contador si es necesario:
+        contadorFrames++;
+        if(contadorFrames>=8){
+            contadorFrames=0;
+        }
+        
+    }
+
+    //nuevo metodo:
+    public void reaparecer(){
+        this.reap=false;
+        if(act.checkJugador[0]==-1){
+            personaje.setX(0,personaje.posIniX[0]);
+            personaje.setY(0,personaje.posIniY[0]);
+        }else{
+            personaje.setX(0,MapaTiles.punto.get(act.checkJugador[0]).posicionPuntoX-1);
+            personaje.setY(0,MapaTiles.punto.get(act.checkJugador[0]).posicionPuntoY-3);
+        }
+    	auxX=personaje.getX(0);
+    	auxY=personaje.getY(0);
+    }
+    
+    public int tomoUnItem(){
+        for(int k=0;k<MapaTiles.items.size();k++){
+            for(int i=0;i<4;i++){
+                for(int j=0;j<3;j++){
+                    if(personaje.personaje[0][i][j]==1){
+    			if((Personaje.y[0]+i)==MapaTiles.items.get(k).posicionItemY && (Personaje.x[0]+j)==MapaTiles.items.get(k).posicionItemX){
+                            int item=MapaTiles.items.get(k).tipoItem;
+                            MapaTiles.items.remove(k);
+                            return item;
+    			}
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+    
+    public int tomoUnCheckPoint(){
+        for(int k=0;k<MapaTiles.punto.size();k++){
+            for(int i=0;i<4;i++){
+                for(int j=0;j<3;j++){
+                    if(personaje.personaje[0][i][j]==1){
+    			if((Personaje.y[0]+i)==MapaTiles.punto.get(k).posicionPuntoY && (Personaje.x[0]+j)==MapaTiles.punto.get(k).posicionPuntoX){
+                            int indice=MapaTiles.punto.get(k).indice;
+                            return indice;
+    			}
+                    }
+                }
+            }
+        }
+        return -1;
+    }
+    
+    public boolean desbloqueado(int posicion, int x, int y){
+        personaje.animar(0,posicion);
+        if(y+3<alto && y>=0 && x+2<ancho && x>=0){
+    		for(int i=0;i<4;i++)
+    			for(int j=0;j<3;j++)
+    				if(personaje.personaje[0][i][j]==1)
+    					if(MapaTiles.mapaFisico[y+i][x+j]==1 || MapaTiles.jugadores[y+i][x+j]==1)
+    						return false;
+    	}else{
+    		return false;
+    	}
+    	return true;
+    }
+    public int sePuedeAgarrar(){//0=no,1=izq,2=der.
+        if((izquierda || izquierda2) && MapaTiles.mapaFisico[Personaje.y[0]+1][Personaje.x[0]]==0 && MapaTiles.jugadores[Personaje.y[0]+1][Personaje.x[0]]==0 && (MapaTiles.mapaFisico[Personaje.y[0]+2][Personaje.x[0]]==1 || MapaTiles.jugadores[Personaje.y[0]+2][Personaje.x[0]]==1)){
+            return 1;
+        }
+        if((derecha || derecha2) && MapaTiles.mapaFisico[Personaje.y[0]+1][Personaje.x[0]+2]==0 && MapaTiles.jugadores[Personaje.y[0]+1][Personaje.x[0]+2]==0 && (MapaTiles.mapaFisico[Personaje.y[0]+2][Personaje.x[0]+2]==1 || MapaTiles.jugadores[Personaje.y[0]+2][Personaje.x[0]+2]==1)){
+            return 2;
+        }
+        return 0;
+    }
+    
+    public boolean quemandose2(){
+        if(personaje.estaVivo[0]==true){
+    	if(Personaje.y[0]+3<alto && Personaje.y[0]>=0 && Personaje.x[0]+2<ancho && Personaje.x[0]>=0){
+    		for(int i=0;i<4;i++)
+    			for(int j=0;j<3;j++)
+    				if(personaje.personaje[0][i][j]==1)
+    					if(MapaTiles.mapaFisico[Personaje.y[0]+i][Personaje.x[0]+j]==2){
+    						return true;
+    					}
+    	}
+        }
+    	return false;
+    }
+    
+    public boolean curandose2(){
+        if(personaje.estaVivo[0]==true){
+    	if(Personaje.y[0]+3<alto && Personaje.y[0]>=0 && Personaje.x[0]+2<ancho && Personaje.x[0]>=0){
+    		for(int i=0;i<4;i++)
+    			for(int j=0;j<3;j++)
+    				if(personaje.personaje[0][i][j]==1)
+    					if(MapaTiles.mapaFisico[Personaje.y[0]+i][Personaje.x[0]+j]==3){
+    						return true;
+    					}
+    	}
+        }
+    	return false;
+    }
+    public boolean aguandose(){
+        if(personaje.estaVivo[0]==true){
+    	if(Personaje.y[0]+3<alto && Personaje.y[0]>=0 && Personaje.x[0]+2<ancho && Personaje.x[0]>=0){
+    		for(int i=0;i<4;i++)
+    			for(int j=0;j<3;j++)
+    				if(personaje.personaje[0][i][j]==1)
+    					if(MapaTiles.mapaFisico[Personaje.y[0]+i][Personaje.x[0]+j]==4){//si es agua.
+    						return true;
+    					}
+    	}
+        }
+    	return false;
+    }
+    
+    
+    
+    public boolean perdio(){
+        if(Teclas.modoJuego==1){
+            if(personaje.puntos[0]<=0){
+                personaje.estaVivo[0]=false;
+                return true;
+            }
+        }else{
+            if(personaje.puntos[0]<=0){
+                personaje.estaVivo[0]=false;
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean gano(){
+    	//if(j2.estaVivo()==false) return true;
+        if(Teclas.modoJuego==1){
+            
+            for(int i=0;i<3;i++){
+                for(int j=0;j<4;j++){
+                    int jr=jugadoresRestantes();
+                    if(((personaje.getX(0)+i)==Teclas.estrellaX && (personaje.getY(0)+j)==Teclas.estrellaY && personaje.estaVivo[0]==true) || jr<=0){
+                        Jugador1.reap=true;
+                        Jugador2.reap=true;
+                        Jugador3.reap=true;
+                        Jugador4.reap=true;
+                        //no reemplazar:
+                        personaje.vidas[0]=act.vidaJugador[0];//no reemplazar
+                        personaje.vidas[1]=act.vidaJugador[1];//no reemplazar
+                        personaje.vidas[2]=act.vidaJugador[2];//no reemplazar
+                        personaje.vidas[3]=act.vidaJugador[3];//no reemplazar
+                        if(Teclas.jugadores>=1){
+                            personaje.estaVivo[0]=true;//no reemplazar
+                        }
+                        if(Teclas.jugadores>=2){
+                            personaje.estaVivo[1]=true;
+                        }
+                        if(Teclas.jugadores>=3){
+                            personaje.estaVivo[2]=true;
+                        }
+                        if(Teclas.jugadores>=4){
+                            personaje.estaVivo[3]=true;
+                        }
+                        personaje.puntos[0]=3;//no reemplazar
+                        personaje.puntos[1]=3;
+                        personaje.puntos[2]=3;
+                        personaje.puntos[3]=3;
+                        Balas.bala[0][0][0]=0;//no reemplazar
+                        Balas.bala[1][0][0]=0;//no reemplazar
+                        Balas.bala[2][0][0]=0;//no reemplazar
+                        Balas.bala[3][0][0]=0;//no reemplazar
+                        //solo este jugador:
+                        balas.borrarBalas();
+                        
+                        if(jr>0){
+                            Juego.corriendo=false;//se carga el proximo nivel
+                            return true;
+                        }else{
+                            Juego.perdieron=true;//reaparece a los enemigos.
+                        }
+                        
+                    }
+                }
+            }
+            
+        }else{
+            
+            if(jugadoresRestantes()<=1){
+                reaparecer();
+                Juego.corriendo=false;
+                personaje.vidas[0]=act.vidaJugador[0];//no reemplazar
+                personaje.vidas[1]=act.vidaJugador[1];
+                personaje.vidas[2]=act.vidaJugador[2];
+                personaje.vidas[3]=act.vidaJugador[3];
+                personaje.puntos[0]=3;//no reemplazar
+                personaje.puntos[1]=3;
+                personaje.puntos[2]=3;
+                personaje.puntos[3]=3;
+                Balas.bala[0][0][0]=0;//no reemplazar
+                Balas.bala[1][0][0]=0;//no reemplazar
+                Balas.bala[2][0][0]=0;//no reemplazar
+                Balas.bala[3][0][0]=0;//no reemplazar
+                direccion=2;
+                return true;
+            }
+        }
+    	
+    	return false;
+    	
+    }
+    //fin no reemplazar.
+    public int jugadoresRestantes(){
+        int contador=0;
+        for(int i=0;i<Teclas.jugadores;i++){
+            if(personaje.estaVivo[i]==true){
+                contador++;
+            }
+        }
+        return contador;
+    }
+    
+    public boolean murio(){
+    	
+        if(Teclas.modoJuego==1){
+            
+            if(personaje.vidas[0]<=0){
+                personaje.puntos[0]--;
+    		direccion=2;
+    		personaje.vidas[0]=act.vidaJugador[0];
+                if(perdio()){//para q aparezca en el inicio y no en el check...
+                    act.checkJugador[0]=-1;
+                }
+    		return true;
+            }
+        }else{
+            if(personaje.vidas[0]<=0){
+    		personaje.puntos[0]--;
+    		direccion=2;
+    		personaje.vidas[0]=act.vidaJugador[0];
+    		return true;
+            }
+        }
+    	
+    	return false;
+    }
+    // tecla sin pulsar
+    public void keyReleased(KeyEvent e) {
+    	int k=e.getKeyCode();
+    	if(k==teclaDisparo){
+    		disparo=false;
+                disparado=false;
+    	}
+    	if(k==teclaSalto){
+    		espacio=false;
+    	}
+    	if(k==teclaIzquierda){
+    		izquierda=false;
+    	}
+    	if(k==teclaDerecha){
+    		derecha=false;
+    	}
+    	if(k==teclaArriba){
+    		arriba=false;
+    	}
+    	if(k==teclaAgacharse){
+    		agacharse=false;
+    	}
+        if(k==teclaCorriendo){
+    		corriendo=false;
+    	}
+        if(k==teclaCambiar){
+    		cambiar=false;
+                cambiado=false;
+    	}
+    }
+ 
+    //tecla presionada
+    public void keyPressed(KeyEvent e) {
+    	
+    	int k=e.getKeyCode();
+    	if(k==teclaDisparo){
+    		disparo=true;
+                disparo2=true;
+    	}
+    	if(k==teclaSalto){
+    		espacio=true;
+    		espacio2=true;
+    	}
+    	if(k==teclaIzquierda){
+    		izquierda=true;
+    		izquierda2=true;
+    	}
+    	if(k==teclaDerecha){
+    		derecha=true;
+    		derecha2=true;
+    	}
+    	if(k==teclaArriba){
+    		arriba=true;
+    		arriba2=true;
+    	}
+    	if(k==teclaAgacharse){
+    		agacharse=true;
+    		agacharse2=true;
+    	}
+        if(k==teclaCorriendo){
+    		corriendo=true;
+    		corriendo2=true;
+    	}
+        if(k==teclaCambiar){
+    		cambiar=true;
+    		cambiar2=true;
+    	}
+    }
+ 
+    public void keyTyped(KeyEvent e) {
+        
+    }
+
+}

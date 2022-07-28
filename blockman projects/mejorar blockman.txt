@@ -1,0 +1,1 @@
+hacer que el menu no se cierre al ejecutar el juego (para reconfigurar la partida e iniciar un nuevo juego).

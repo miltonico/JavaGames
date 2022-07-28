@@ -1,0 +1,4 @@
+coloque las imagenes y doc txt en el disco c sueltos.
+el programa xpadder es para emular las teclas del segundo jugador en un joystick (el perfil se llama pongman).
+ejecute el jar del juego
+juegue

@@ -1,0 +1,27 @@
+propiedades de los objetos con fuerza:
+
+*peso: la fuerza aplicada debe ser mayor al peso para que pueda haber una reaccion.
+
+*fuerza: al moverse el personaje tiene una fuerza determinada, con la que puede contrarestar
+ otras fuerzas/resistencias de personajes u objetos.
+
+*si un personaje no se mueve para contrarestar una fuerza, esta contra la pared, y esta fuerza supera la resistencia del personaje mas su peso,
+ el personaje sufre daño equivalente a: (fuerza oponente)-(su porpia resistencia mas su peso).
+
+*la fuerza de un personaje es en el fondo la que le sobra de moverse a si mismo.
+
+ejemplo:
+los personajes tienen: fuerza 4, resistencia 4, peso 4
+
+si esta quieto, etonces fuerza=0;
+sino fuerza=4-peso;
+
+si no hay pared, entonces resistencia=0;
+sino resistencia=5;
+
+fuerza de movimiento=((fuerza_opuesta) - (peso+resistencia+fuerza);
+
+p1=quieto
+p2=empujando a p1
+resultado=p1 se mueve con una fuerza de 2
+fuerza de movimiento de p1 = fuerza

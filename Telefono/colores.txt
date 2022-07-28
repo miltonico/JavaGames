@@ -1,0 +1,8 @@
+amarillo=ffff00
+rojo=FF0000
+verde=00FF00
+azul=0000FF
+cafe=7F3F00
+celeste=00ffff
+blanco=ffffff
+negro=000000

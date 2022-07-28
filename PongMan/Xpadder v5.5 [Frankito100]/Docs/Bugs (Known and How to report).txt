@@ -1,0 +1,138 @@
+Xpadder is still not 100% perfect yet - although I am trying to make it so :)
+
+Below are all the known issues with Xpadder.
+This is the actual document I use to list bugs - nothing leaves this list until it is fixed completely.
+
+If you find Xpadder doing something wrong please email me at jonathan@xpadder.com with as much information
+as possible and I will try my best to fix it quickly. 
+
+Category	Bug								Credit		Fix
+=============================================================================================================================
+
+Key/Mouse	Key emulation does not work in games using anti-hack software	-		Contact game makers to get
+Emulation	(eg; online RPGs) 								Xpadder whitelisted
+
+		Key emulation does not work in MAME version 0.118 and newer	-		Download XpadderMAMEmod from
+												Blackhole support forum
+
+		Key/mouse emulation does not work in Windows Vista 		-		Run Xpadder as admin
+		admin-run applications
+
+		Key/mouse emulation does not work in Windows Vista		-		Use real mouse/keyboard
+		UAC prompts/Login screen
+
+		Print Screen/Pause key functionality missing			-		Use real keyboard
+												Use Escape to pause games
+												by opening menu
+
+		Ctrl+Alt+Del combination does not work				-		Use real keyboard or
+												Ctrl+Shift+Escape
+												(thanks to Karzon for fix)
+
+=============================================================================================================================
+
+Controller	Games that read gamepad can interfere				-		Disable joystick in game or
+connection											connect joystick after
+												starting game
+
+		Dis/reconnecting first of two identical controllers causes	Stu		Don't disconnect controllers
+		controller id problems (thanks to Stu)						out of order/Restart Xpadder
+
+		Xbox 360 power info takes a few seconds from connecting		-		Restart Xpadder if power
+		before it's available 	 							is unknown
+
+=============================================================================================================================
+
+Main		If "Autominimize when opening profile" and "Auto-open last	-		Alter the options
+window		used profile" options are on then the main window minimizes
+
+		A custom system font dpi affects: checkboxes, window titles,	-		-
+		scrollbars in text areas, combobox arrows, popupmenu text,
+		help text & dialog slightly larger
+
+		Animation can sometimes move slower than usual			CyberMSX	Increasing memory from 512MB to
+												1GB fixed the problem!		
+
+=============================================================================================================================
+
+Controller	Xbox 360 arcade/driving controllers have incorrect buttons	-		Disable XInput in Xpadder
+Settings 	if XInput is enabled								settings window
+Window
+		Controller Settings ignored if controller settings window	-		Disable XInput in Xpadder
+		closed and Xbox 360 controller and XInput in use				settings window
+
+		Xbox 360 controller trigger detection in controller settings,	SGTCableDog	Only hold one trigger
+		with left trigger half held, right trigger reads incorrectly
+
+		Triggers that use stacking buttons for stages only register	goe		Edit controller file
+		first stage (button1=stage1, button1+2=stage2 etc)				and add buttons
+
+=============================================================================================================================
+
+Controller	Opening a controller file for a different controller with	Andy M		-
+		different axes settings causes Xpadder to think controls are
+		active
+
+=============================================================================================================================
+
+Assigmnent	In assignment window (NO advanced window open) you can press	-		-
+Window		Shift again and again and again... and again!
+
+		A sequence in destination set of While Held set selector	-		-
+		returns to previous set when finished even though button is
+		still held down
+
+		An assignment in source set of While Held set selector does	-		-
+		not obey KeyTapTime before switching set
+
+=============================================================================================================================
+
+Taskbar and	TrayMinimize or startup causes icon to appear on taskbar in	-		-
+Tray Icon	XP and Vista globe to glow
+
+		Tray icon does not return after explorer crash			-		Restart Xpadder or uncheck
+												then recheck tray icon option
+=============================================================================================================================
+
+Keyboard	Keytest shows MULTI when typing too fast			Tre		-
+Settings
+		Using two fingers on different keys very fast causes		Matt		-
+		keyboard test to show a space for the active time
+
+=============================================================================================================================
+
+Mouse		If any stick or DPad direction is assigned to mouse spring	-		-
+Settings	then any other mouse assignments are ignored
+
+		If slow mouse set to Dpad then Down+Right does not emulate	-		Use higher mouse speed
+		properly (even though mouse settings window status is correct)
+
+		Mouse wheel tilt does not work in Windows 2000/XP and some	-		-
+		applications in Windows Vista
+
+		Open assignment window, open mouse settings, set assignment	-		-
+		to mouse up, mouse settings window does not update with new
+		options now available
+
+=============================================================================================================================
+
+Command		Opening a profile via command line in lowercase uses profile	-		-
+Line		name in lower case instead of obtaining actual file casing
+
+		Opening a profile via command line with "..\" location does	-		-
+		not convert to absolute when displaying controller details
+
+		Executable name retrieval casing uses launch command casing	-		-
+		and not actual program casing
+
+=============================================================================================================================
+
+Exit		DInput error on exit caused error and INI is not updated	x-vicious-x	-
+
+		Disconnecting selected controller while exit animation		Matt		- Manually close window
+		is running prevents automatic exit
+
+		Moving window while exit animation is running prevents		-		- Manually close window
+		automatic exit
+
+=============================================================================================================================

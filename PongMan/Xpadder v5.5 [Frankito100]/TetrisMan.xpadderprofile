@@ -1,0 +1,20 @@
+;----------------------
+; Xpadder Profile File
+;----------------------
+
+Version=5.5
+
+[Profile Settings]
+
+[Set Settings]
+
+[Assignments]
+Set1Button2Slots=Arrow Up
+Set1Button3Slots=Space
+Set1Button4Slots=F
+Set1Button5Slots=S
+Set1Button6Slots=S
+Set1DPadUpSlots=S
+Set1DPadRightSlots=Arrow Right
+Set1DPadDownSlots=Arrow Down
+Set1DPadLeftSlots=Arrow Left

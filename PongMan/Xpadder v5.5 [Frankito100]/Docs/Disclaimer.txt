@@ -1,0 +1,2 @@
+Disclaimer
+You use this program at your own risk. This program has been fully tested during development but there are no guarantees that it is free of fault. The author cannot accept responsibility for any damage of any kind that this program may cause

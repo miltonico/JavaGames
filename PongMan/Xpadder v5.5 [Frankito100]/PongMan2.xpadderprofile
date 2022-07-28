@@ -1,0 +1,19 @@
+;----------------------
+; Xpadder Profile File
+;----------------------
+
+Version=5.5
+
+[Profile Settings]
+
+[Set Settings]
+
+[Assignments]
+Set1Button3Slots=Home
+Set1Button4Slots=End
+Set1Button5Slots=1
+Set1Button6Slots=3
+Set1DPadUpSlots=Page Up
+Set1DPadRightSlots=3
+Set1DPadDownSlots=Page Down
+Set1DPadLeftSlots=1

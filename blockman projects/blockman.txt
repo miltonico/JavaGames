@@ -1,0 +1,65 @@
+hacer q se agarre tambien si esta en posicion de paleta, no solo si se esta apretando arriba.
+hacer que quede guardado el indice del dispositivo para que cuando se inicie el juego, se autoseleccione.
+hacer los bloques desencadenadores, con tiempo de espera o simplemente que cambie el estado hasta que se desencadene nuevamente.
+hacer los bloques moviles, con velocidad inicial(se podra modificar la velocidad).
+hacer los bloques modificadores(de velocidad, retrasos, tipo de bloque, etc)
+hacer los bloques direccionales(modifican o asignan una direccion de movimiento a bloques moviles)
+los bloques moviles pueden ser desencadenadores, modificadores, direccionales, etc.
+caracteristicas:
+
+retraso anterior(demora en desencadenar):
+letra = a
+numeros = 0 a ? (cada 1 representa 1 regeneracion de pantalla (maxima velocidad)).
+por defecto es 0.
+
+retraso posterior(demora en terminar luego de desencadenar):
+letra = p
+numeros = 0 a ? (cada 1 representa 1 regeneracion de pantalla (maxima velocidad)).
+por defecto es 0.
+
+
+i1v1d1e1t1a0p0=bloque movil con indice=1, velocidad=1, direccion=derecha, estado=activado, numero de bloque=1, sin retraso anterior y posterior.
+
+
+rediseño:
+
+*las propiedades del bloque definen que bloque es...
+*en esta version se pueden llegar a construir maquinas piloteadas.
+
+*caracteristicas bloques moviles:
+-e=estado: 1=activado/0=desactivado.
+-r=retardo(0=quieto): desde 1 a ?, 1=velocidad maxima.
+-d=direccion(0=sin direccion): de 1 a 8 (iz,de,ar,ab,iz-ar,de-ar,iz-ab,de-ab).(son 8 direcciones para q puedan haber maquinas piloteadas).
+-t=tipo de bloque: 0=traspasable e invisible, 1= visible y solido, 2=visible, solido y resbaloso.
+-i=indice(0=bloque independiente): desde 1...se especifica para que los bloques actuen como uno solo o en grupos diferentes.
+-m=movilidad en conjunto: 0=desactivado/1=activado(se mueven todos los bloques con el mismo indice en la misma direccion).
+-b=bloque: de 0 a ?
+
+*caracteristicas bloques interruptores:
+-e=estado: 1=activado/0=desactivado.
+-b=bloque: de 0 a ?
+
+*caracteristicas bloques boton (podrian ser para plataformas moviles que mientras estan siendo pisadas se muevan, etc):
+-e=estado: 1=activado/0=desactivado.
+-b=bloque: de 0 a ?
+
+*caracteristicas bloques modificadores(los bloques modificadores necesitan sobreponerse a otro bloque para afectarlo, ya sea que el mismo bloque
+modificador sea traspasable o el bloque afectado sea traspasable):
+-e=estado: 1=activado/0=desactivado.
+-b=bloque: de 0 a ?
+-ce=cambio de estado(0/1)
+-cr=cambio de retardo(0/?)
+-cd=cambio de direccion(0/8)
+-ct=cambio de tipo de bloque(0/2)
+-ci=cambio de indice(0/999)
+-cm=cambio de mobilidad en cjto(0/1)
+-cb=cambio de bloque(0/?)
+
+
+
+
+
+
+
+
+

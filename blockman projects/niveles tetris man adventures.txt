@@ -1,0 +1,33 @@
+tutorial 0:
+
+moverse
+saltar
+saltar manteniendo apretado
+saltar precipicio
+
+checkpoint
+
+disparar a barrera
+disparar a enemigo facil
+recoger capsula de vida
+
+checkpoint
+
+fin del tutorial
+
+
+poderes:
+
+*normal-> se transforma al color normal(podria camuflarse)
+
+*amarillo->correr(gasta energia)
+
+*rojo->resistencia a la lava, no ralentiza(gasta energia)
+
+*verde-> se trasforma en serpiente(gasta energia)
+
+*azul->le permite nadar rapidamente(como moverse a velocidad normal bajo el agua)
+
+*cafe->mas fuerza
+
+la energia se recupera rapidamente(1 cada 1 seg aprox).

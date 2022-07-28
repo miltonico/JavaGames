@@ -1,0 +1,10 @@
+[InstallShield Silent]
+Version=v7.00
+File=Log File
+[ResponseResult]
+ResultCode=0
+[Application]
+Name=Atheros Client Installation Program
+Version=9.0
+Company=Atheros
+Lang=040a

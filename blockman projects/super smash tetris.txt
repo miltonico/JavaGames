@@ -1,0 +1,9 @@
+
+
+ataques:
+
+-combo
+-patada
+-agarrar
+-lanzar(objetos)
+-ataque especial
